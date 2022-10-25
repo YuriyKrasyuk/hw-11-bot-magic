@@ -134,19 +134,21 @@ def add_contact_handler(contact_info):
 def find_contact_handler(contact_info):
     name = contact_info[0]
     record = CONTACTS.data[name]
-    # for phone in record.phones:
-    # print(phone.value)
     print(repr(record))
 
 
 @ corrector
 def delete_phone_handler(contact_info):
     name = contact_info[0]
-    phone = contact_info[1]
+    delete_phone = contact_info[1]
     record = CONTACTS.data[name]
     for phone in record.phones:
-        record.remove_phone(phone)
-    print(f'Phone number "{phone.value}" for "{name}" was deleted')
+        if phone.value == delete_phone:
+            record.remove_phone(phone)
+            print(f'Phone number "{delete_phone}" for "{name}" was deleted')
+            break
+    else:
+        print(f'No such number "{delete_phone} for name "{name}"')
 
 
 @ corrector
@@ -161,6 +163,7 @@ def change_contact_handler(contact_info):
             print(
                 f'Phone "{old_phone}" was changed on"{new_phone}" for "{name}"')
             break
+    else:
         print(f'No such number "{old_phone} for name "{name}"')
 
 
