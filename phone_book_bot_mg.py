@@ -8,17 +8,15 @@ class Field:
         self.value = value
         self.__value = None   # <-- value was added
 
+
+class Name(Field):
     @property
     def value(self):          # <-- getter was added
         return self.__value
 
     @value.setter
     def value(self, value):   # <--setter was added
-        self._value = value
-
-
-class Name(Field):
-    pass
+        self.__value = value
 
 
 class Phone(Field):
@@ -30,8 +28,9 @@ class Phone(Field):
     def value(self, value):
         if value.isdigit() and len(value) == 12:
             self.__value = value
-        raise Exception(
-            f'Please enter phone number as 12 digits in format: "XXXXXXXXXXXX"')
+        else:
+            raise Exception(
+                f'Please enter phone number as 12 digits in format: "XXXXXXXXXXXX"')
 
 
 class Birthday(Field):         # <-- new class was added
